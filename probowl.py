@@ -61,7 +61,7 @@ df_final = fetch_player_names(all_players, players_data)
 # Define team rosters and positions
 league_name = "Champs"
 team1_ids = ['3163', '4892', '3198', '9753', '7547', '6801', '11631', '11604', '9756', '8130']
-pos1 = ['QB', 'QB', 'WR', 'WR', 'TE', 'QB', 'RB', 'Flex', 'WR', 'Flex']
+pos1 = ['QB', 'QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE', 'Flex', 'Flex']
 team2_ids = ['6770', '7523', '3198', '1466', '4199', '6794', '6786', '2449', '4217', '7547']
 pos2 = ['Flex', 'Flex', 'WR', 'WR', 'RB', 'TE', 'WR', 'QB', 'QB', 'RB']
 team_names = ['Team Chad', 'Team AJ']
