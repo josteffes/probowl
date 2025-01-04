@@ -3,13 +3,12 @@ import pandas as pd
 from sleeper_wrapper import League, Players
 
 # --- Constants ---
-LEAGUE_ID = '784429591107379200'  # Replace with your league ID
+LEAGUE_ID = '1048276012670267392'  # Replace with your league ID
 league = League(LEAGUE_ID)
 players_data = Players().get_all_players()
 
 # --- User Inputs ---
-year = st.text_input("Enter the Year (e.g., 2024):", "2024")
-week = st.text_input("Enter the Week (e.g., 18):", "18")
+week = 17
 
 # --- Helper Functions ---
 def get_matchup_points(league, week):
