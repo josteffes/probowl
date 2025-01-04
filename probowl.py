@@ -8,7 +8,7 @@ league = League(LEAGUE_ID)
 players_data = Players().get_all_players()
 
 # --- User Inputs ---
-week = 18
+week = 17
 
 # --- Helper Functions ---
 def get_matchup_points(league, week):
@@ -62,8 +62,8 @@ df_final = fetch_player_names(all_players, players_data)
 league_name = "Champs"
 team1_ids = ['3163', '4892', '3198', '9753', '7547', '6801', '11631', '11604', '9756', '8130']
 pos1 = ['QB', 'QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE', 'Flex', 'Flex']
-team2_ids = ['6770', '7523', '3198', '1466', '4199', '6794', '6786', '2449', '4217', '7547']
-pos2 = ['Flex', 'Flex', 'WR', 'WR', 'RB', 'TE', 'WR', 'QB', 'QB', 'RB']
+team2_ids = ['4881', '11563', '9509', '9221', '6794', '7564', '2216', '10859', '5850', '11584']
+pos2 = ['QB', 'QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE', 'Flex', 'Flex']
 team_names = ['Team Chad', 'Team AJ']
 
 # Create roster dataframes
