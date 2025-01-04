@@ -70,6 +70,9 @@ team_names = ['Team Chad', 'Team AJ']
 team1_df = create_roster_dataframe(df_points, df_final, team1_ids, pos1)
 team2_df = create_roster_dataframe(df_points, df_final, team2_ids, pos2)
 
+team1_df.reset_index(inplace=True)
+team2_df.reset_index(inplace=True)
+
 # --- Display Results ---
 col1, col2 = st.columns(2)
 
