@@ -8,7 +8,7 @@ league = League(LEAGUE_ID)
 players_data = Players().get_all_players()
 
 # --- User Inputs ---
-week = 17
+week = 18
 
 # --- Helper Functions ---
 def get_matchup_points(league, week):
