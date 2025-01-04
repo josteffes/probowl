@@ -27,28 +27,30 @@ def get_matchup_points(league, week):
     df_points.columns = ['PlayerID', 'Pts']
     return df_points, all_players
 
-def fetch_player_names(all_players, players_data):
-    """Fetch player names and IDs."""
-    allnames, allids = [], []
+def fetch_player_names_and_positions(all_players, players_data):
+    """Fetch player names, IDs, and positions."""
+    allnames, allids, allpositions = [], [], []
     for player_id in all_players:
         try:
             player_info = players_data[player_id]
             allnames.append(player_info['full_name'])
             allids.append(player_id)
+            allpositions.append(player_info.get('position', 'NA'))  # Default to 'NA' if position is missing
         except KeyError:
             # Handle missing players
             allnames.append(player_id)
             allids.append(player_id)
+            allpositions.append('NA')
 
-    return pd.DataFrame({'player_name': allnames, 'id': allids})
+    return pd.DataFrame({'player_name': allnames, 'id': allids, 'position': allpositions})
 
-def create_roster_dataframe(df_points, df_final, roster_ids, positions):
-    """Create a roster dataframe with total points."""
+def create_roster_dataframe(df_points, df_final, roster_ids):
+    """Create a roster dataframe with total points and auto-filled positions."""
     boolean_series = df_final.id.isin(roster_ids)
-    df_roster = df_final[boolean_series][['player_name', 'id']].copy()
+    df_roster = df_final[boolean_series][['player_name', 'id', 'position']].copy()
     df_roster['pts'] = df_roster['id'].map(df_points.set_index('PlayerID')['Pts'])
-    df_roster['pos'] = positions
-    df_roster['pos'] = pd.Categorical(df_roster['pos'], ['QB', 'RB', 'WR', 'TE', 'Flex', 'Def', 'NA'])
+    df_roster['pos'] = df_roster['position']
+    df_roster['pos'] = pd.Categorical(df_roster['pos'], ['QB', 'RB', 'WR', 'TE', 'Flex', 'Def', 'K', 'NA'])
     df_roster = df_roster.sort_values('pos').reset_index(drop=True)
     total_points = df_roster['pts'].sum()
     df_roster = pd.concat([df_roster, pd.DataFrame({'pos': ['Total'], 'player_name': ['Total'], 'pts': [total_points]})])
@@ -56,19 +58,17 @@ def create_roster_dataframe(df_points, df_final, roster_ids, positions):
 
 # --- Data Processing ---
 df_points, all_players = get_matchup_points(league, week)
-df_final = fetch_player_names(all_players, players_data)
+df_final = fetch_player_names_and_positions(all_players, players_data)
 
-# Define team rosters and positions
+# Define team rosters
 league_name = "Champs"
 team1_ids = ['3163', '4892', '3198', '9753', '7547', '6801', '11631', '11604', '9756', '8130']
-pos1 = ['QB', 'QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE', 'Flex', 'Flex']
 team2_ids = ['4881', '11563', '9509', '9221', '6794', '7564', '2216', '10859', '5850', '11584']
-pos2 = ['QB', 'QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE', 'Flex', 'Flex']
 team_names = ['Team Chad', 'Team AJ']
 
 # Create roster dataframes
-team1_df = create_roster_dataframe(df_points, df_final, team1_ids, pos1)
-team2_df = create_roster_dataframe(df_points, df_final, team2_ids, pos2)
+team1_df = create_roster_dataframe(df_points, df_final, team1_ids)
+team2_df = create_roster_dataframe(df_points, df_final, team2_ids)
 
 team1_df = team1_df.set_index('pos')
 team2_df = team2_df.set_index('pos')
