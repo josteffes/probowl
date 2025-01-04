@@ -59,19 +59,12 @@ df_points, all_players = get_matchup_points(league, week)
 df_final = fetch_player_names(all_players, players_data)
 
 # Define team rosters and positions
-league_name = st.radio("Select League", ["Tweak", "Champs"])
-if league_name == "Tweak":
-    team1_ids = ['4984', '6770', '2161', '4018', '7564', '2133', '5859', '5022', '6803', '6786', 'PIT']
-    pos1 = ['RB', 'QB', 'Def', 'Flex', 'Flex', 'QB', 'TE', 'RB', 'WR', 'WR', 'WR']
-    team2_ids = ['4046', '3198', '5850', '1466', '3294', '2449', '3321', '5846', '4034', '4663', 'NE']
-    pos2 = ['Flex', 'QB', 'WR', 'RB', 'WR', 'WR', 'QB', 'RB', 'TE', 'Def', 'Flex']
-    team_names = ['Team Spencer', 'Team AJ']
-else:
-    team1_ids = ['4984', '4046', '4663', '4018', '5859', '4034', '3321', '4950', '2133', '4066']
-    pos1 = ['QB', 'RB', 'WR', 'WR', 'TE', 'QB', 'RB', 'Flex', 'WR', 'Flex']
-    team2_ids = ['6770', '7523', '3198', '1466', '4199', '6794', '6786', '2449', '4217', '7547']
-    pos2 = ['Flex', 'Flex', 'WR', 'WR', 'RB', 'TE', 'WR', 'QB', 'QB', 'RB']
-    team_names = ['Team Bruno', 'Team Evan']
+league_name = "Champs"
+team1_ids = ['4984', '4046', '4663', '4018', '5859', '4034', '3321', '4950', '2133', '4066']
+pos1 = ['QB', 'RB', 'WR', 'WR', 'TE', 'QB', 'RB', 'Flex', 'WR', 'Flex']
+team2_ids = ['6770', '7523', '3198', '1466', '4199', '6794', '6786', '2449', '4217', '7547']
+pos2 = ['Flex', 'Flex', 'WR', 'WR', 'RB', 'TE', 'WR', 'QB', 'QB', 'RB']
+team_names = ['Team Bruno', 'Team Evan']
 
 # Create roster dataframes
 team1_df = create_roster_dataframe(df_points, df_final, team1_ids, pos1)
